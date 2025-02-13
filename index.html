@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matheus Victor - Portfólio</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+    <div class="loading-screen">
+        <div class="loader">
+            <span class="loader-text">Loading</span>
+            <span class="load"></span>
+        </div>
+    </div>
+
+    <canvas id="webgl-canvas"></canvas>
+
+    <!-- vertexShader -->
+    <script id="js-vertex-shader" type="x-shader/x-vertex">
+        attribute vec3 position;
+        
+        void main()	{
+          gl_Position = vec4(position, 1.0);
+        }
+    </script>
+
+    <!-- fragmentShader -->
+    <script id="js-fragment-shader" type="x-shader/x-fragment">
+        precision highp float;
+        uniform vec2 resolution;
+        uniform float time;
+        uniform float xScale;
+        uniform float yScale;
+        uniform float distortion;
+
+        void main() {
+          vec2 p = (gl_FragCoord.xy * 2.0 - resolution) / min(resolution.x, resolution.y);
+          
+          float d = length(p) * distortion;
+          
+          float rx = p.x * (1.0 + d);
+          float gx = p.x;
+          float bx = p.x * (1.0 - d);
+
+          float r = 0.05 / abs(p.y + sin((rx + time) * xScale) * yScale);
+          float g = 0.05 / abs(p.y + sin((gx + time) * xScale) * yScale);
+          float b = 0.05 / abs(p.y + sin((bx + time) * xScale) * yScale);
+          
+          gl_FragColor = vec4(r, g, b, 1.0);
+        }
+    </script>
+
+    <div class="content">
+        <nav class="navbar">
+            <div class="nav-content">
+                <div class="logo">MV</div>
+                <ul class="nav-links">
+                    <li><a href="#home">Início</a></li>
+                    <li><a href="#sobre">Sobre</a></li>
+                    <li><a href="#projetos">Projetos</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <div class="profile-container">
+                    <div class="profile-image">
+                        <img src="profile/profile.png" alt="Matheus Victor">
+                    </div>
+                    <div class="profile-text">
+                        <h1>Matheus Victor</h1>
+                        <p class="typing-text">Desenvolvedor Full Stack</p>
+                        <div class="social-links">
+                            <a href="https://github.com/matheusvctor" target="_blank"><i class="fab fa-github"></i></a>
+                            <a href="https://www.linkedin.com/in/matheus-victor-296095243/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="sobre" class="about">
+            <h2>Sobre Mim</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Olá! Sou um desenvolvedor apaixonado por criar soluções inovadoras e funcionais.</p>
+                    <!-- Você pode adicionar mais informações sobre você aqui -->
+                </div>
+            </div>
+        </section>
+
+        <section id="projetos" class="projects">
+            <h2>Projetos</h2>
+            <div class="projects-grid">
+                <!-- Os projetos serão adicionados dinamicamente via JavaScript -->
+            </div>
+        </section>
+
+        <section id="contato" class="contact">
+            <h2>Contato</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <p>(83) 9 8135-1770</p>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fab fa-github"></i>
+                        <a href="https://github.com/matheusvctor" target="_blank">github.com/matheusvctor</a>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fab fa-linkedin"></i>
+                        <a href="https://www.linkedin.com/in/matheus-victor-296095243/" target="_blank">LinkedIn</a>
+                    </div>
+                </div>
+                <form id="contact-form">
+                    <input type="text" placeholder="Nome" required>
+                    <input type="email" placeholder="Email" required>
+                    <textarea placeholder="Mensagem" required></textarea>
+                    <button type="submit">Enviar Mensagem</button>
+                </form>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Matheus Victor. Todos os direitos reservados.</p>
+    </footer>
+
+    <script src="background.js"></script>
+    <script src="script.js"></script>
+</body>
+</html> 
