@@ -6,7 +6,6 @@
     <title>Matheus Victor - Portfólio</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
 <body>
     <div class="loading-screen">
@@ -16,47 +15,18 @@
         </div>
     </div>
 
-    <canvas id="webgl-canvas"></canvas>
+    <div id="particles-js" class="particles-background"></div>
 
-    <!-- vertexShader -->
-    <script id="js-vertex-shader" type="x-shader/x-vertex">
-        attribute vec3 position;
-        
-        void main()	{
-          gl_Position = vec4(position, 1.0);
-        }
-    </script>
-
-    <!-- fragmentShader -->
-    <script id="js-fragment-shader" type="x-shader/x-fragment">
-        precision highp float;
-        uniform vec2 resolution;
-        uniform float time;
-        uniform float xScale;
-        uniform float yScale;
-        uniform float distortion;
-
-        void main() {
-          vec2 p = (gl_FragCoord.xy * 2.0 - resolution) / min(resolution.x, resolution.y);
-          
-          float d = length(p) * distortion;
-          
-          float rx = p.x * (1.0 + d);
-          float gx = p.x;
-          float bx = p.x * (1.0 - d);
-
-          float r = 0.05 / abs(p.y + sin((rx + time) * xScale) * yScale);
-          float g = 0.05 / abs(p.y + sin((gx + time) * xScale) * yScale);
-          float b = 0.05 / abs(p.y + sin((bx + time) * xScale) * yScale);
-          
-          gl_FragColor = vec4(r, g, b, 1.0);
-        }
-    </script>
+    <div class="container">
+    </div>
 
     <div class="content">
         <nav class="navbar">
             <div class="nav-content">
                 <div class="logo">MV</div>
+                <button class="menu-button">
+                    <i class="fas fa-bars"></i>
+                </button>
                 <ul class="nav-links">
                     <li><a href="#home">Início</a></li>
                     <li><a href="#sobre">Sobre</a></li>
@@ -88,8 +58,49 @@
             <h2>Sobre Mim</h2>
             <div class="about-content">
                 <div class="about-text">
-                    <p>Olá! Sou um desenvolvedor apaixonado por criar soluções inovadoras e funcionais.</p>
-                    <!-- Você pode adicionar mais informações sobre você aqui -->
+                    <p>Olá! Sou um desenvolvedor apaixonado por criar soluções inovadoras e funcionais. Atualmente estou me formando em Ciências da Computação na Universidade Estadual da Paraíba (UEPB).</p>
+                    <p>Além da programação, tenho diversos hobbies que me ajudam a manter um equilíbrio criativo:</p>
+                    <div class="hobbies">
+                        <div class="hobby-item">
+                            <i class="fas fa-gamepad"></i>
+                            <span>Jogos</span>
+                        </div>
+                        <div class="hobby-item">
+                            <i class="fas fa-pencil-alt"></i>
+                            <span>Desenho</span>
+                        </div>
+                        <div class="hobby-item">
+                            <i class="fas fa-book-reader"></i>
+                            <span>Leitura</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="timeline" class="timeline-section">
+            <h2>Minha Jornada</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>2009</h3>
+                        <p>Primeiro contato com um computador aos 8 anos de idade, despertando minha curiosidade pela tecnologia.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>2021</h3>
+                        <p>Primeiro contato com programação, pouco antes de ingressar na faculdade. Foi quando descobri minha verdadeira paixão.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>Presente</h3>
+                        <p>Minha paixão e interesse por tecnologia continuam crescendo a cada dia, buscando sempre aprender mais e me desenvolver na área.</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -132,7 +143,7 @@
         <p>&copy; 2024 Matheus Victor. Todos os direitos reservados.</p>
     </footer>
 
-    <script src="background.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html> 

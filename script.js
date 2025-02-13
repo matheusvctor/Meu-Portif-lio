@@ -135,4 +135,157 @@ window.addEventListener('scroll', () => {
             link.classList.add('active');
         }
     });
+});
+
+// Função para verificar elementos visíveis durante o scroll
+function checkVisibility() {
+    const elements = document.querySelectorAll('.timeline');
+    
+    elements.forEach(element => {
+        const elementTop = element.getBoundingClientRect().top;
+        const elementBottom = element.getBoundingClientRect().bottom;
+        const windowHeight = window.innerHeight;
+        
+        // Elemento é considerado visível quando 30% dele está na tela
+        const isVisible = (elementTop < windowHeight - (windowHeight * 0.3)) && (elementBottom > 0);
+        
+        if (isVisible) {
+            element.classList.add('visible');
+        }
+    });
+}
+
+// Inicializa as animações quando o DOM estiver carregado
+document.addEventListener('DOMContentLoaded', () => {
+    // Verifica visibilidade inicial após um pequeno delay
+    setTimeout(() => {
+        checkVisibility();
+    }, 500);
+
+    // Inicializa particles.js
+    particlesJS('particles-js', {
+        particles: {
+            number: {
+                value: 80,
+                density: {
+                    enable: true,
+                    value_area: 800
+                }
+            },
+            color: {
+                value: '#e81cff' // Cor primária do site
+            },
+            shape: {
+                type: 'circle'
+            },
+            opacity: {
+                value: 0.5,
+                random: true,
+                anim: {
+                    enable: true,
+                    speed: 1,
+                    opacity_min: 0.1,
+                    sync: false
+                }
+            },
+            size: {
+                value: 3,
+                random: true,
+                anim: {
+                    enable: true,
+                    speed: 2,
+                    size_min: 0.1,
+                    sync: false
+                }
+            },
+            line_linked: {
+                enable: true,
+                distance: 150,
+                color: '#40c9ff', // Cor secundária do site
+                opacity: 0.4,
+                width: 1
+            },
+            move: {
+                enable: true,
+                speed: 2,
+                direction: 'none',
+                random: false,
+                straight: false,
+                out_mode: 'out',
+                bounce: false,
+                attract: {
+                    enable: true,
+                    rotateX: 600,
+                    rotateY: 1200
+                }
+            }
+        },
+        interactivity: {
+            detect_on: 'canvas',
+            events: {
+                onhover: {
+                    enable: true,
+                    mode: 'grab'
+                },
+                onclick: {
+                    enable: true,
+                    mode: 'push'
+                },
+                resize: true
+            },
+            modes: {
+                grab: {
+                    distance: 140,
+                    line_linked: {
+                        opacity: 1
+                    }
+                },
+                push: {
+                    particles_nb: 4
+                }
+            }
+        },
+        retina_detect: true
+    });
+});
+
+// Listener para o scroll com debounce para melhor performance
+let scrollTimeout;
+window.addEventListener('scroll', () => {
+    if (scrollTimeout) {
+        window.cancelAnimationFrame(scrollTimeout);
+    }
+    
+    scrollTimeout = window.requestAnimationFrame(() => {
+        checkVisibility();
+    });
+});
+
+// Controle do menu mobile
+const menuButton = document.querySelector('.menu-button');
+const menuLinks = document.querySelector('.nav-links');
+const navbar = document.querySelector('.navbar');
+
+menuButton.addEventListener('click', () => {
+    menuLinks.classList.toggle('active');
+    menuButton.innerHTML = menuLinks.classList.contains('active') ? 
+        '<i class="fas fa-times"></i>' : 
+        '<i class="fas fa-bars"></i>';
+});
+
+// Fechar menu ao clicar em um link
+document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+        menuLinks.classList.remove('active');
+        menuButton.innerHTML = '<i class="fas fa-bars"></i>';
+    });
+});
+
+// Efeito de scroll na navbar
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+    } else {
+        navbar.classList.remove('scrolled');
+    }
 }); 
