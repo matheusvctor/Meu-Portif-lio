@@ -102,10 +102,4 @@ Contribuições são sempre bem-vindas! Sinta-se à vontade para:
 - GitHub: [@matheusvctor](https://github.com/matheusvctor)
 - Email: matheusrochamil203@gmail.com
 
-## 📄 Licença
-
-Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
-
----
-
 ⭐️ Desenvolvido por [Matheus Victor](https://github.com/matheusvctor) 
