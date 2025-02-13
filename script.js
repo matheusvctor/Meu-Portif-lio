@@ -106,10 +106,33 @@ if (contactForm) {
     contactForm.addEventListener('submit', function(e) {
         e.preventDefault();
         
-        // Aqui você pode adicionar a lógica para enviar o formulário
-        // Por exemplo, usando EmailJS ou outro serviço de email
-        alert('Mensagem enviada com sucesso!');
-        contactForm.reset();
+        const formData = {
+            from_name: this.querySelector('input[type="text"]').value,
+            from_email: this.querySelector('input[type="email"]').value,
+            message: this.querySelector('textarea').value,
+            to_email: 'matheusrochamil203@gmail.com'
+        };
+
+        // Mostrar loading
+        const submitButton = this.querySelector('button[type="submit"]');
+        const originalText = submitButton.textContent;
+        submitButton.disabled = true;
+        submitButton.textContent = 'Enviando...';
+
+        // Enviar e-mail usando EmailJS
+        emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', formData)
+            .then(() => {
+                alert('Mensagem enviada com sucesso!');
+                contactForm.reset();
+            })
+            .catch((error) => {
+                console.error('Erro ao enviar mensagem:', error);
+                alert('Erro ao enviar mensagem. Por favor, tente novamente.');
+            })
+            .finally(() => {
+                submitButton.disabled = false;
+                submitButton.textContent = originalText;
+            });
     });
 }
 
